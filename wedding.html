@@ -30,10 +30,27 @@
             overflow-x: hidden;
         }
 
+        /* ===== CREDIT BAR ===== */
+        .credit-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001;
+            background: rgba(40, 5, 14, 0.97);
+            text-align: center;
+            padding: 7px 16px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: rgba(201, 162, 53, 0.95);
+            font-family: 'Raleway', sans-serif;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(201, 162, 53, 0.35);
+        }
+
         /* ===== NAV ===== */
         nav {
             position: fixed;
-            top: 0;
+            top: 22px;
             width: 100%;
             z-index: 1000;
             background: rgba(60, 10, 22, 0.96);
@@ -716,6 +733,9 @@
 </head>
 <body>
 
+<!-- CREDIT BAR -->
+<div class="credit-bar">made with love by Arnav</div>
+
 <!-- NAV -->
 <nav>
     <ul>
@@ -1022,7 +1042,6 @@
     <div class="hero-divider" style="margin-bottom: 30px;"></div>
     <div class="footer-bottom">
         Made with love for Aditya &amp; Vaidehi &nbsp;·&nbsp; A Maharashtrian Love Story &nbsp;·&nbsp; 2026
-        <br><br>Made with love by Arnav
     </div>
 </footer>
 
