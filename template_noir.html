@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aditya &amp; Vaidehi — Married 8th May 2026, Nashik. A Maharashtrian love story.">
+    <meta property="og:title" content="Aditya &amp; Vaidehi | Married · 8 May 2026">
+    <meta property="og:description" content="A Maharashtrian love story. Married 8th May 2026, Nashik, Maharashtra.">
+    <meta property="og:type" content="website">
+    <title>Aditya &amp; Vaidehi | Married · 8 May 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+/* ================================================================
+   TOKENS
+================================================================ */
+:root {
+    --black  : #0A0608;
+    --deep   : #100910;
+    --surface: #161014;
+    --gold   : #C9A235;
+    --gold-d : #8A6E22;
+    --cream  : #F5E9D4;
+    --cream-d: rgba(245,233,212,.6);
+    --cream-x: rgba(245,233,212,.3);
+}
+
+/* ================================================================
+   RESET / BASE
+================================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+    font-family:'Montserrat',sans-serif;
+    background:var(--black);
+    color:var(--cream);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+}
+
+/*
+ * Global image rule — prevents ANY image from ever stretching
+ * its container. Individual overrides use position:absolute.
+ */
+img { display:block; max-width:100%; height:auto; }
+
+/* ================================================================
+   NAV
+================================================================ */
+nav {
+    position:fixed;
+    top:0; width:100%;
+    z-index:900;
+    padding:20px 56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+nav::after {
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom,rgba(10,6,8,.88) 0%,transparent 100%);
+    pointer-events:none; z-index:-1;
+}
+.nav-logo {
+    font-family:'Great Vibes',cursive;
+    font-size:1.7rem;
+    color:var(--gold);
+    text-decoration:none;
+}
+.nav-links { display:flex; list-style:none; gap:38px; }
+.nav-links a {
+    color:rgba(245,233,212,.5);
+    text-decoration:none;
+    font-size:.6rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:300;
+    transition:color .25s;
+}
+.nav-links a:hover { color:var(--gold); }
+.nav-credit { font-size:.58rem; letter-spacing:1.5px; color:rgba(245,233,212,.22); }
+
+/* Hamburger */
+.nav-burger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:4px;
+}
+.nav-burger span {
+    display:block; width:22px; height:1px;
+    background:var(--gold);
+    transition:transform .3s, opacity .3s;
+}
+.nav-mobile {
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(10,6,8,.97);
+    z-index:800;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:32px;
+}
+.nav-mobile.open { display:flex; }
+.nav-mobile a {
+    color:var(--cream);
+    text-decoration:none;
+    font-size:.82rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    transition:color .2s;
+}
+.nav-mobile a:hover { color:var(--gold); }
+.nav-mobile-close {
+    position:absolute; top:24px; right:28px;
+    color:var(--gold); font-size:1.8rem;
+    background:none; border:none; cursor:pointer; line-height:1;
+}
+
+/* ================================================================
+   HERO
+================================================================ */
+#hero {
+    position:relative;
+    height:100vh;
+    height:100dvh;
+    min-height:620px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+/*
+ * Split background — two flex halves, each position:relative so
+ * the absolutely-positioned image inside has a definite containing
+ * block. overflow:hidden clips any landscape image that would
+ * otherwise exceed the half-width.
+ */
+.hero-bg {
+    position:absolute; inset:0;
+    display:flex;               /* two equal halves */
+}
+.hero-bg-half {
+    position:relative;          /* containing block for the img */
+    flex:1;
+    overflow:hidden;            /* clip landscape overflow */
+}
+.hero-bg-half img {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center top;
+    opacity:0;                  /* starts invisible; JS fades in once src is set */
+    transition:opacity 1.2s ease;
+}
+.hero-vignette {
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 80% 80% at 50% 50%,
+        rgba(10,6,8,.1) 0%,
+        rgba(10,6,8,.74) 100%);
+}
+.hero-seam {
+    position:absolute; top:0; bottom:0; left:50%;
+    width:1px;
+    background:linear-gradient(to bottom,
+        transparent 0%,
+        rgba(201,162,53,.5) 28%,
+        rgba(201,162,53,.5) 72%,
+        transparent 100%);
+    transform:translateX(-50%);
+}
+
+.hero-content {
+    position:relative; z-index:1;
+    padding:20px;
+}
+.hero-overline {
+    font-size:.58rem; letter-spacing:6px; text-transform:uppercase;
+    color:var(--gold); opacity:.75; margin-bottom:36px;
+}
+.hero-om {
+    font-size:1.8rem; color:var(--gold); opacity:.55;
+    display:block; margin-bottom:26px;
+}
+.hero-names {
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(3.6rem,10vw,8rem);
+    color:var(--cream); line-height:1.1;
+    text-shadow:0 0 80px rgba(201,162,53,.16);
+}
+.hero-amp {
+    color:var(--gold);
+    font-size:clamp(2.2rem,6vw,4.6rem);
+    display:block; margin:-6px 0;
+}
+.hero-vline {
+    width:1px; height:50px;
+    background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+    margin:28px auto;
+}
+.hero-married {
+    font-size:.62rem; letter-spacing:8px; text-transform:uppercase;
+    color:var(--cream-d); margin-bottom:6px;
+}
+.hero-date {
+    font-family:'Bodoni Moda',serif;
+    font-size:clamp(1rem,2.5vw,1.6rem);
+    font-style:italic; color:var(--gold); margin-bottom:44px;
+}
+.hero-badge {
+    display:inline-block;
+    border:1px solid rgba(201,162,53,.3);
+    padding:18px 40px;
+}
+.badge-num {
+    font-family:'Bodoni Moda',serif;
+    font-size:clamp(2.2rem,5vw,3.6rem);
+    color:var(--cream); display:block; line-height:1;
+}
+.badge-lbl {
+    font-size:.55rem; letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold); margin-top:5px; opacity:.7;
+}
+
+.hero-scroll {
+    position:absolute; bottom:28px; left:50%;
+    transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:7px;
+    animation:bob 2.4s ease-in-out infinite;
+}
+.hero-scroll span {
+    font-size:.52rem; letter-spacing:3px; text-transform:uppercase;
+    color:rgba(245,233,212,.28);
+}
+.scroll-tick {
+    width:1px; height:32px;
+    background:linear-gradient(to bottom,rgba(201,162,53,.45),transparent);
+}
+@keyframes bob {
+    0%,100% { transform:translateX(-50%) translateY(0); }
+    50%      { transform:translateX(-50%) translateY(9px); }
+}
+
+/* ================================================================
+   PHOTO DIVIDERS — full-bleed between sections
+================================================================ */
+.photo-div {
+    position:relative;
+    height:68vh;
+    min-height:300px;
+    overflow:hidden;            /* clip landscape overflow */
+}
+.photo-div img {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center;
+    transition:transform 8s ease;
+}
+.photo-div:hover img { transform:scale(1.04); }
+.photo-div-cap {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:36px 60px 28px;
+    background:linear-gradient(to top,rgba(10,6,8,.78) 0%,transparent 100%);
+}
+.cap-tag {
+    font-size:.55rem; letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold); opacity:.75; margin-bottom:5px;
+}
+.cap-text {
+    font-family:'Bodoni Moda',serif;
+    font-size:clamp(1.2rem,2.8vw,2rem);
+    font-style:italic; color:var(--cream);
+}
+
+/* ================================================================
+   SECTIONS — common
+================================================================ */
+section { padding:100px 60px; }
+.inner  { max-width:1060px; margin:0 auto; }
+.s-num  { font-size:.52rem; letter-spacing:3px; color:var(--gold-d); text-transform:uppercase; margin-bottom:10px; }
+.s-h    { font-family:'Bodoni Moda',serif; font-size:clamp(2rem,5vw,3.8rem); font-style:italic; color:var(--cream); line-height:1.15; margin-bottom:16px; }
+.s-rule { width:42px; height:1px; background:var(--gold); margin-bottom:50px; }
+
+/* ================================================================
+   STORY
+================================================================ */
+#story { background:var(--deep); }
+.story-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:start;
+}
+.story-lead { font-size:.88rem; line-height:2.1; color:var(--cream-d); margin-bottom:40px; }
+.stats { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.stat  { border:1px solid rgba(201,162,53,.14); padding:20px; }
+.stat-n {
+    font-family:'Bodoni Moda',serif;
+    font-size:2.2rem; color:var(--gold); line-height:1;
+}
+.stat-l { font-size:.56rem; letter-spacing:2px; text-transform:uppercase; color:var(--cream-d); margin-top:5px; }
+
+.chapters { display:flex; flex-direction:column; }
+.ch { padding:24px 0; border-bottom:1px solid rgba(245,233,212,.055); }
+.ch:last-child { border-bottom:none; }
+.ch-tag  { font-size:.52rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); opacity:.6; margin-bottom:5px; }
+.ch-name { font-family:'Bodoni Moda',serif; font-size:1.25rem; font-style:italic; color:var(--cream); margin-bottom:9px; }
+.ch-body { font-size:.82rem; line-height:1.95; color:var(--cream-d); }
+
+/* ================================================================
+   COUPLE
+================================================================ */
+#couple { background:var(--surface); padding:0; }
+.couple-section-head { padding:80px 60px 48px; }
+
+.couple-row { display:grid; grid-template-columns:1fr 1fr; }
+.c-card {
+    position:relative;
+    overflow:hidden;
+    /* Explicit padding-top creates the aspect ratio via the block
+       formatting context — the img then fills absolutely.
+       3:4 portrait = 133.33% */
+    padding-top:133.33%;
+}
+.c-card img {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center top;
+    filter:grayscale(8%);
+    transition:transform .65s ease, filter .4s ease;
+}
+.c-card:hover img { transform:scale(1.045); filter:grayscale(0%); }
+.c-info {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:50px 36px 32px;
+    background:linear-gradient(to top,rgba(10,6,8,.9) 0%,transparent 100%);
+}
+.c-role { font-size:.55rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); opacity:.8; margin-bottom:5px; }
+.c-name { font-family:'Bodoni Moda',serif; font-size:clamp(1.8rem,3vw,2.8rem); font-style:italic; color:var(--cream); margin-bottom:12px; }
+.c-bio  { font-size:.8rem; line-height:1.85; color:rgba(245,233,212,.68); max-width:380px; }
+
+/* ================================================================
+   GALLERY
+================================================================ */
+#gallery { background:var(--black); padding:80px 0 100px; }
+.gal-head {
+    padding:0 60px;
+    margin-bottom:36px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+.gal-filters { display:flex; flex-wrap:wrap; gap:6px; }
+.gf-btn {
+    background:none;
+    border:1px solid rgba(245,233,212,.1);
+    color:rgba(245,233,212,.42);
+    font-family:'Montserrat',sans-serif;
+    font-size:.56rem; letter-spacing:2px; text-transform:uppercase;
+    padding:8px 18px; cursor:pointer; transition:all .22s;
+}
+.gf-btn.on, .gf-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/*
+ * Grid uses explicit grid-auto-rows so each cell has a defined
+ * pixel height. The img inside each .gi fills absolutely.
+ */
+.gal-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:280px;
+    gap:3px;
+}
+.gi {
+    position:relative;
+    overflow:hidden;            /* clip landscape overflow */
+    cursor:pointer;
+}
+.gi.w2 { grid-column:span 2; }
+.gi.h2 { grid-row:span 2; }
+
+.gi img {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center;
+    filter:grayscale(18%);
+    transition:filter .35s ease, transform .4s ease;
+}
+.gi:hover img { filter:grayscale(0%); transform:scale(1.05); }
+.gi-shim {
+    position:absolute; inset:0;
+    background:rgba(10,6,8,0);
+    transition:background .28s;
+}
+.gi:hover .gi-shim { background:rgba(10,6,8,.2); }
+.gal-empty {
+    grid-column:span 4;
+    text-align:center;
+    padding:60px 20px;
+    font-style:italic;
+    color:var(--cream-x);
+    font-size:.85rem;
+}
+
+/* ================================================================
+   LIGHTBOX
+================================================================ */
+.lb {
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(5,3,4,.97);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+}
+.lb.open { display:flex; }
+.lb-wrap { position:relative; max-width:92vw; max-height:92vh; }
+.lb-wrap img {
+    max-width:88vw;
+    max-height:88vh;
+    object-fit:contain;
+    display:block;
+}
+.lb-close {
+    position:fixed; top:22px; right:28px;
+    color:var(--gold); font-size:2rem;
+    cursor:pointer; background:none; border:none; line-height:1; z-index:10;
+}
+.lb-arrow {
+    position:fixed; top:50%; transform:translateY(-50%);
+    color:rgba(201,162,53,.5); font-size:2.4rem;
+    background:none; border:none; cursor:pointer;
+    padding:12px; transition:color .2s; z-index:10;
+    line-height:1;
+}
+.lb-arrow:hover { color:var(--gold); }
+.lb-prev { left:16px; }
+.lb-next { right:16px; }
+
+/* ================================================================
+   QUOTE
+================================================================ */
+#quote { background:var(--deep); text-align:center; padding:120px 20px; }
+.quote-inner { max-width:680px; margin:0 auto; }
+.q-mark {
+    font-family:'Bodoni Moda',serif;
+    font-size:7rem; color:var(--gold);
+    opacity:.1; line-height:.5; margin-bottom:36px;
+}
+.q-text {
+    font-family:'Bodoni Moda',serif;
+    font-size:clamp(1.4rem,3.5vw,2.3rem);
+    font-style:italic; color:var(--cream);
+    line-height:1.9; margin-bottom:38px;
+}
+.q-rule { width:38px; height:1px; background:var(--gold); margin:0 auto 18px; opacity:.45; }
+.q-src  { font-size:.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--cream-d); opacity:.55; }
+
+/* ================================================================
+   FOOTER
+================================================================ */
+footer {
+    background:var(--black);
+    border-top:1px solid rgba(201,162,53,.1);
+    padding:80px 20px 48px;
+    text-align:center;
+}
+.f-om     { font-size:1.7rem; color:var(--gold); opacity:.45; margin-bottom:22px; }
+.f-names  { font-family:'Great Vibes',cursive; font-size:3.6rem; color:var(--cream); margin-bottom:10px; }
+.f-date   { font-size:.62rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); opacity:.55; margin-bottom:34px; }
+.f-bless  { font-family:'Bodoni Moda',serif; font-style:italic; font-size:1.05rem; color:var(--cream-d); margin-bottom:5px; }
+.f-bless-e{ font-size:.73rem; color:rgba(245,233,212,.22); margin-bottom:48px; }
+.f-base   {
+    font-size:.6rem; letter-spacing:2px; color:rgba(245,233,212,.16);
+    border-top:1px solid rgba(245,233,212,.055);
+    padding-top:22px;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width:900px) {
+    nav { padding:18px 28px; }
+    .nav-links, .nav-credit { display:none; }
+    .nav-burger { display:flex; }
+
+    section { padding:80px 28px; }
+    .couple-section-head { padding:60px 28px 36px; }
+
+    .story-grid  { grid-template-columns:1fr; gap:50px; }
+    .couple-row  { grid-template-columns:1fr; }
+    .c-card      { padding-top:100%; }   /* wider card on mobile */
+
+    .gal-grid    { grid-template-columns:repeat(2,1fr); grid-auto-rows:220px; }
+    .gi.w2, .gi.h2 { grid-column:span 1; grid-row:span 1; }
+    .gal-head    { flex-direction:column; align-items:flex-start; padding:0 28px; }
+    .photo-div-cap { padding:20px 28px 16px; }
+}
+
+@media (max-width:560px) {
+    /* One photo fills the hero on tiny screens */
+    .hero-bg-half:last-child { display:none; }
+    .hero-bg-half            { flex:unset; width:100%; }
+
+    .photo-div  { height:52vh; }
+    .gal-grid   { grid-template-columns:1fr 1fr; grid-auto-rows:160px; }
+    section     { padding:64px 18px; }
+}
+    </style>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav>
+    <a href="#hero" class="nav-logo">A &amp; V</a>
+    <ul class="nav-links">
+        <li><a href="#story">Story</a></li>
+        <li><a href="#couple">Couple</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#quote">Love</a></li>
+    </ul>
+    <span class="nav-credit">made with love by Arnav</span>
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-label="Navigation">
+    <button class="nav-mobile-close" id="nav-mobile-close" aria-label="Close menu">&times;</button>
+    <a href="#story"   onclick="closeMobileNav()">Story</a>
+    <a href="#couple"  onclick="closeMobileNav()">Couple</a>
+    <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
+    <a href="#quote"   onclick="closeMobileNav()">Love</a>
+</div>
+
+<!-- ====== HERO ====== -->
+<section id="hero">
+    <div class="hero-bg">
+        <div class="hero-bg-half">
+            <img src="data:," id="hero-img-l" alt="">
+        </div>
+        <div class="hero-bg-half">
+            <img src="data:," id="hero-img-r" alt="">
+        </div>
+    </div>
+    <div class="hero-vignette"></div>
+    <div class="hero-seam"></div>
+
+    <div class="hero-content">
+        <div class="hero-overline">Nashik, Maharashtra &nbsp;·&nbsp; Shubh Vivah</div>
+        <span class="hero-om">ॐ</span>
+        <div class="hero-names">
+            Aditya
+            <span class="hero-amp">&amp;</span>
+            Vaidehi
+        </div>
+        <div class="hero-vline"></div>
+        <div class="hero-married">Are Married</div>
+        <div class="hero-date">8th May 2026</div>
+        <div class="hero-badge">
+            <span class="badge-num" id="days-num">0</span>
+            <div class="badge-lbl">Days Together</div>
+        </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-tick"></div>
+    </div>
+</section>
+
+<!-- ====== PHOTO DIVIDER 1 ====== -->
+<div class="photo-div" aria-hidden="true">
+    <img src="data:," id="div-img-1" alt="">
+    <div class="photo-div-cap">
+        <div class="cap-tag">8th May 2026 · Varmala</div>
+        <div class="cap-text">The moment two became one.</div>
+    </div>
+</div>
+
+<!-- ====== STORY ====== -->
+<section id="story">
+    <div class="inner">
+        <div class="s-num">01 / 04</div>
+        <h2 class="s-h">Their Story</h2>
+        <div class="s-rule"></div>
+        <div class="story-grid">
+
+            <div>
+                <p class="story-lead">A love that didn't announce itself loudly. It grew in the margins of ordinary days — a biodata, a café in Pune, a cricket final, a quiet phone call between families who knew. And then, on an auspicious May morning, everything that had been building quietly became everything.</p>
+                <div class="stats">
+                    <div class="stat"><div class="stat-n">7</div><div class="stat-l">Pheras · Sacred Rounds</div></div>
+                    <div class="stat"><div class="stat-n">2</div><div class="stat-l">Days of Celebration</div></div>
+                    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Years of Love Ahead</div></div>
+                    <div class="stat"><div class="stat-n">1</div><div class="stat-l">Perfect Love Story</div></div>
+                </div>
+            </div>
+
+            <div class="chapters">
+                <div class="ch">
+                    <div class="ch-tag">Nov 2025</div>
+                    <div class="ch-name">A Biodata, A Beginning</div>
+                    <div class="ch-body">Some begin with a biodata, a phone call between families, and a quiet hope. The oldest ways carry the most beautiful beginnings. Two families saw something good — and they were right.</div>
+                </div>
+                <div class="ch">
+                    <div class="ch-tag">A Café in Pune</div>
+                    <div class="ch-name">The Quietest "Hi"</div>
+                    <div class="ch-body">Two people meeting for the first time. Vaidehi — quiet, thoughtful — was a little nervous. That composed smile across the table told Aditya everything he needed to know.</div>
+                </div>
+                <div class="ch">
+                    <div class="ch-tag">14th March 2026 · Nashik</div>
+                    <div class="ch-name">The Promise</div>
+                    <div class="ch-body">Pegasus Banquet Hall. Rings exchanged. The Saakharpuda — the formal promise of a forever. The first page of a story that would fill a lifetime.</div>
+                </div>
+                <div class="ch">
+                    <div class="ch-tag">7th &amp; 8th May 2026</div>
+                    <div class="ch-name">They Said Yes to Forever</div>
+                    <div class="ch-body">The haldi glow. The sangeet. The sacred fire and the seven steps. Every ritual carrying the weight of generations — and the lightness of a love freely chosen. Aditya and Vaidehi are married.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====== PHOTO DIVIDER 2 ====== -->
+<div class="photo-div" aria-hidden="true">
+    <img src="data:," id="div-img-2" alt="">
+    <div class="photo-div-cap">
+        <div class="cap-tag">Haldi · 7th May 2026</div>
+        <div class="cap-text">The golden evening before forever.</div>
+    </div>
+</div>
+
+<!-- ====== COUPLE ====== -->
+<section id="couple">
+    <div class="inner couple-section-head">
+        <div class="s-num">02 / 04</div>
+        <h2 class="s-h">The Couple</h2>
+        <div class="s-rule" style="margin-bottom:0;"></div>
+    </div>
+    <div class="couple-row">
+        <div class="c-card">
+            <img src="Day%202%20-%20A%20Journey%20to%20Forever/Vaidik/VISH5302.jpg" alt="Aditya" style="object-position:50% 20%;">
+            <div class="c-info">
+                <div class="c-role">The Husband</div>
+                <div class="c-name">Aditya</div>
+                <div class="c-bio">28 years old. Product Analyst. The kind of person who reads patterns for a living — yet with Vaidehi, no spreadsheet was needed. He simply knew. Steady, thoughtful, and the kind who always shows up.</div>
+            </div>
+        </div>
+        <div class="c-card">
+            <img src="Day%202%20-%20A%20Journey%20to%20Forever/Vaidik/VISH5548.jpg" alt="Vaidehi">
+            <div class="c-info">
+                <div class="c-role">The Wife</div>
+                <div class="c-name">Vaidehi</div>
+                <div class="c-bio">25 years old. DevOps Engineer. Quietly capable, deeply intelligent. Still waters that run very deep. Aditya had the patience to listen, and found an ocean worth every moment.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PHOTO DIVIDER 3 ====== -->
+<div class="photo-div" aria-hidden="true">
+    <img src="data:," id="div-img-3" alt="">
+    <div class="photo-div-cap">
+        <div class="cap-tag">Sangeet · 7th May 2026</div>
+        <div class="cap-text">Music, laughter, and a night to remember.</div>
+    </div>
+</div>
+
+<!-- ====== GALLERY ====== -->
+<section id="gallery">
+    <div class="gal-head">
+        <div>
+            <div class="s-num">03 / 04</div>
+            <h2 class="s-h" style="font-size:clamp(1.8rem,3.5vw,3rem);margin-bottom:0;">Gallery</h2>
+        </div>
+        <div class="gal-filters" role="group" aria-label="Filter gallery">
+            <button class="gf-btn on"  data-f="all">All</button>
+            <button class="gf-btn" data-f="haldi">Haldi</button>
+            <button class="gf-btn" data-f="sangeet">Sangeet</button>
+            <button class="gf-btn" data-f="vaidik">Vaidik</button>
+            <button class="gf-btn" data-f="varmala">Varmala</button>
+        </div>
+    </div>
+    <div class="gal-grid" id="gal-grid"></div>
+</section>
+
+<!-- ====== QUOTE ====== -->
+<section id="quote">
+    <div class="quote-inner">
+        <div class="q-mark" aria-hidden="true">"</div>
+        <blockquote class="q-text">
+            Tum se hi, tum se hi<br>
+            Din hota hai, tum se hi<br>
+            Raat hoti hai, tum se hi<br>
+            Subah hoti hai, tum se hi…
+        </blockquote>
+        <div class="q-rule"></div>
+        <div class="q-src">Tum Se Hi &nbsp;·&nbsp; Mohit Chauhan &nbsp;·&nbsp; Jab We Met</div>
+    </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+    <div class="f-om" aria-hidden="true">ॐ</div>
+    <div class="f-names">Aditya &amp; Vaidehi</div>
+    <div class="f-date">Married · 8th May 2026 · Nashik, Maharashtra</div>
+    <div class="f-bless">सदैव सुखी राहा &nbsp;·&nbsp; शुभ मंगल सावधान</div>
+    <div class="f-bless-e">May you always be happy &nbsp;·&nbsp; Auspicious is this union</div>
+    <div class="f-base">Made with love by Arnav &nbsp;·&nbsp; A Maharashtrian Love Story &nbsp;·&nbsp; 2026</div>
+</footer>
+
+<!-- ====== LIGHTBOX ====== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-close" id="lb-close" aria-label="Close photo viewer">&times;</button>
+    <button class="lb-arrow lb-prev" id="lb-prev" aria-label="Previous photo">&#8249;</button>
+    <div class="lb-wrap">
+        <img src="" id="lb-img" alt="Wedding photo">
+    </div>
+    <button class="lb-arrow lb-next" id="lb-next" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script>
+/* ================================================================
+   DAYS COUNTER
+================================================================ */
+(function () {
+    const married = new Date('2026-05-08');
+    const now     = new Date(); now.setHours(0,0,0,0);
+    const days    = Math.max(0, Math.floor((now - married) / 864e5));
+    document.getElementById('days-num').textContent = days;
+})();
+
+/* ================================================================
+   MOBILE NAV
+================================================================ */
+function closeMobileNav() {
+    document.getElementById('nav-mobile').classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.getElementById('nav-burger').addEventListener('click', () => {
+    document.getElementById('nav-mobile').classList.add('open');
+    document.body.style.overflow = 'hidden';
+});
+document.getElementById('nav-mobile-close').addEventListener('click', closeMobileNav);
+
+/* ================================================================
+   GALLERY — auto-loads from /api/photos (served by server.js)
+   Sizes are assigned by index pattern for visual variety.
+================================================================ */
+let ALL_PHOTOS = [];   /* filled by the API */
+let visible    = [];
+let lbIdx      = 0;
+
+const grid = document.getElementById('gal-grid');
+
+/* Assign a display size based on position so the grid looks organic */
+function sizeFor(i) {
+    if (i % 11 === 0) return 'w2';   /* wide: every 11th  */
+    if (i % 7  === 0) return 'h2';   /* tall: every 7th   */
+    return '';                         /* standard: the rest */
+}
+
+function buildGrid(filter) {
+    visible = filter === 'all'
+        ? ALL_PHOTOS
+        : ALL_PHOTOS.filter(p => p.cat === filter);
+
+    grid.innerHTML = '';
+
+    if (!visible.length) {
+        grid.innerHTML = '<div class="gal-empty">No photos in this category yet.</div>';
+        return;
+    }
+
+    const frag = document.createDocumentFragment();
+    visible.forEach((p, i) => {
+        const el = document.createElement('div');
+        el.className = 'gi' + (p.size ? ' ' + p.size : '');
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-label', 'Open photo');
+        el.innerHTML = `<img src="${p.src}" alt="Aditya &amp; Vaidehi" loading="lazy"><div class="gi-shim" aria-hidden="true"></div>`;
+        el.addEventListener('click',   () => openLb(i));
+        el.addEventListener('keydown', e => { if (e.key === 'Enter') openLb(i); });
+        frag.appendChild(el);
+    });
+    grid.appendChild(frag);
+}
+
+/* Filter buttons */
+document.querySelectorAll('.gf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        buildGrid(btn.dataset.f);
+    });
+});
+
+/* Load photos from /api/photos (served by server.js).
+   All image src values come from the API — no hardcoded
+   encoded paths in HTML, so no browser/server decoding mismatch. */
+fetch('/api/photos')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(photos => {
+        /* ── Hero + divider images — set by exact filename ── */
+        const setImg = (id, src) => {
+            if (!src) return;
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.onload = () => { el.style.opacity = '.6'; };
+            el.src = src;
+        };
+        const find = (name) =>
+            photos.find(p => decodeURIComponent(p.src).endsWith('/' + name))?.src;
+
+        setImg('hero-img-l', find('VISH7097.jpg'));
+        setImg('hero-img-r', find('VISH7382.jpg'));
+        setImg('div-img-1',  find('VISH7938.jpg'));
+        setImg('div-img-2',  find('VISH3589.jpg'));
+        setImg('div-img-3',  find('6L3A0915.jpg'));
+
+        /* ── Gallery ── */
+        ALL_PHOTOS = photos.map((p, i) => ({ ...p, size: sizeFor(i) }));
+        buildGrid('all');
+    })
+    .catch(() => {
+        grid.innerHTML = '<div class="gal-empty">Start the server: <code>node server.js</code></div>';
+    });
+
+/* ================================================================
+   LIGHTBOX
+================================================================ */
+function openLb(index) {
+    lbIdx = index;
+    document.getElementById('lb-img').src = visible[lbIdx].src;
+    document.getElementById('lb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lb-close').focus();
+}
+function closeLb() {
+    document.getElementById('lb').classList.remove('open');
+    document.body.style.overflow = '';
+}
+function lbStep(dir) {
+    lbIdx = (lbIdx + dir + visible.length) % visible.length;
+    document.getElementById('lb-img').src = visible[lbIdx].src;
+}
+
+document.getElementById('lb-close').addEventListener('click', closeLb);
+document.getElementById('lb-prev').addEventListener('click', () => lbStep(-1));
+document.getElementById('lb-next').addEventListener('click', () => lbStep(1));
+document.getElementById('lb').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeLb();
+});
+document.addEventListener('keydown', e => {
+    if (!document.getElementById('lb').classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLb();
+    if (e.key === 'ArrowLeft')   lbStep(-1);
+    if (e.key === 'ArrowRight')  lbStep(1);
+});
+
+/* ================================================================
+   SCROLL REVEAL
+================================================================ */
+const revEls = document.querySelectorAll('.ch, .stat, .c-card, .photo-div');
+revEls.forEach(el => {
+    el.style.opacity   = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .65s ease, transform .65s ease';
+});
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.style.opacity   = '1';
+            e.target.style.transform = 'translateY(0)';
+            io.unobserve(e.target);
+        }
+    });
+}, { threshold:.08 });
+revEls.forEach(el => io.observe(el));
+
+/* ================================================================
+   NAV ACTIVE HIGHLIGHT
+================================================================ */
+const secs  = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    links.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold)' : '';
+    });
+}, { passive:true });
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Wedding photos — too large for git, deploy separately to the server
+Day 1 - Laughter, Light & Music/
+Day 2 - A Journey to Forever/
+images_wedding/
+
+# Misc
+.claude/
+node_modules/
