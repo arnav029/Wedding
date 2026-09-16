@@ -1,0 +1,253 @@
+{
+ "roles": {
+  "hero-desktop": {
+   "src": "photos/hero-desktop.jpg",
+   "w": 2800,
+   "h": 1868,
+   "thumb": "photos/hero-desktop-sm.jpg"
+  },
+  "hero-mobile": {
+   "src": "photos/hero-mobile.jpg",
+   "w": 1867,
+   "h": 2800,
+   "thumb": "photos/hero-mobile-sm.jpg"
+  },
+  "closing": {
+   "src": "photos/closing.jpg",
+   "w": 1868,
+   "h": 2800
+  },
+  "scene-haldi": {
+   "src": "photos/scene-haldi.jpg",
+   "w": 2800,
+   "h": 1868,
+   "thumb": "photos/scene-haldi-sm.jpg"
+  },
+  "scene-sangeet": {
+   "src": "photos/scene-sangeet.jpg",
+   "w": 2800,
+   "h": 1868,
+   "thumb": "photos/scene-sangeet-sm.jpg"
+  },
+  "scene-vaidik": {
+   "src": "photos/scene-vaidik.jpg",
+   "w": 2800,
+   "h": 1868,
+   "thumb": "photos/scene-vaidik-sm.jpg"
+  },
+  "scene-varmala": {
+   "src": "photos/scene-varmala.jpg",
+   "w": 2800,
+   "h": 1868,
+   "thumb": "photos/scene-varmala-sm.jpg"
+  }
+ },
+ "chapters": {
+  "haldi": [
+   {
+    "src": "photos/haldi-01.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-01-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-02.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-02-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-03.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-03-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-04.jpg",
+    "w": 2000,
+    "h": 1334,
+    "thumb": "photos/haldi-04-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-05.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-05-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-06.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-06-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-07.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-07-sm.jpg"
+   },
+   {
+    "src": "photos/haldi-08.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/haldi-08-sm.jpg"
+   }
+  ],
+  "sangeet": [
+   {
+    "src": "photos/sangeet-01.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-01-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-02.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-02-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-03.jpg",
+    "w": 2000,
+    "h": 1334,
+    "thumb": "photos/sangeet-03-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-04.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-04-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-05.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-05-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-06.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-06-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-07.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-07-sm.jpg"
+   },
+   {
+    "src": "photos/sangeet-08.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/sangeet-08-sm.jpg"
+   }
+  ],
+  "vaidik": [
+   {
+    "src": "photos/vaidik-01.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-01-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-02.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-02-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-03.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-03-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-04.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-04-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-05.jpg",
+    "w": 1333,
+    "h": 2000,
+    "thumb": "photos/vaidik-05-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-06.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-06-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-07.jpg",
+    "w": 1333,
+    "h": 2000,
+    "thumb": "photos/vaidik-07-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-08.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-08-sm.jpg"
+   },
+   {
+    "src": "photos/vaidik-09.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/vaidik-09-sm.jpg"
+   }
+  ],
+  "varmala": [
+   {
+    "src": "photos/varmala-01.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-01-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-02.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-02-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-03.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-03-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-04.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-04-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-05.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-05-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-06.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-06-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-07.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-07-sm.jpg"
+   },
+   {
+    "src": "photos/varmala-08.jpg",
+    "w": 1334,
+    "h": 2000,
+    "thumb": "photos/varmala-08-sm.jpg"
+   }
+  ]
+ }
+}
